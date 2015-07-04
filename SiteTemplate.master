@@ -1,0 +1,47 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SiteTemplate.master.cs" Inherits="SiteTemplate" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+<%--    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>--%>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table style="width:800px;">
+            <tr>
+                <td colspan="2" style="height:50px; align-content:center; vertical-align:central;">
+                    <asp:ContentPlaceHolder id="cphTop" runat="server">
+                        상단영역
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td style="height:100px; width:200px; vertical-align:top;">
+                    <asp:ContentPlaceHolder id="cphLeft" runat="server">
+                        좌측영역
+                    </asp:ContentPlaceHolder>
+                </td>
+                <td style="width:600px; vertical-align:top;">
+                    <asp:ContentPlaceHolder id="cphContent" runat="server">
+                        콘텐츠영역
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:50px; align-content:center;">
+                    <asp:ContentPlaceHolder id="cphBottom" runat="server">
+                        하단영역
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+        </table>
+        
+    </div>
+    </form>
+</body>
+</html>
