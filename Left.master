@@ -68,33 +68,57 @@
         </tr>
         <tr>
             <td style="text-align:center;">
-                <img src="./images/mailinglist.gif" alt="" />
+                <table style="width:200px;">
+                    <tr>
+                        <td style="text-align:center;">
+                            <img src="./images/mailinglist.gif" alt="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left; height:35px; vertical-align:bottom;">   
+                            이메일 주소
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;">
+                            <asp:TextBox ID="txtEmailAddress" runat="server" width="190px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="vldEmailRequired" runat="server" Display="None" ErrorMessage="이메일 주소를 입력하세요." ControlToValidate="txtEmailAddress"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="vldEmailExp" runat="server" Display="None" ValidationExpression="\S+@\S+\.\S+" ControlToValidate="txtEmailAddress" ErrorMessage="이메일 주소 형식이 맞지 않습니다."></asp:RegularExpressionValidator>
+                            <asp:ValidationSummary ID="vldSummary" runat="server" ShowMessageBox="true" ShowSummary="false" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center; height:35px; vertical-align:bottom;">
+                            <asp:Button ID="btnSubscribe" runat="server" Text="가입" OnClick="btnSubscribe_Click" />
+                            &nbsp;&nbsp;
+                            <asp:Button ID="btnUnsbuscribe" runat="server" Text="탈퇴" OnClick="btnUnsubscribe_Click" />
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr>
-            <td style="text-align:left; height:35px; vertical-align:bottom;">   
-                이메일 주소
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:TextBox ID="txtEmailAddress" runat="server" width="190px"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="vldEmailRequired" runat="server" Display="None" ErrorMessage="이메일 주소를 입력하세요." ControlToValidate="txtEmailAddress"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="vldEmailExp" runat="server" Display="None" ValidationExpression="\S+@\S+\.\S+" ControlToValidate="txtEmailAddress" ErrorMessage="이메일 주소 형식이 맞지 않습니다."></asp:RegularExpressionValidator>
-                <asp:ValidationSummary ID="vldSummary" runat="server" ShowMessageBox="true" ShowSummary="false" />
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align:center; height:35px; vertical-align:bottom;">
-                <asp:Button ID="btnSubscribe" runat="server" Text="가입" OnClick="btnSubscribe_Click" />
-                &nbsp;&nbsp;
-                <asp:Button ID="btnUnsbuscribe" runat="server" Text="탈퇴" OnClick="btnUnsubscribe_Click" />
+            <td style="text-align:center;">
+                <table style="width:200px;">
+                    <tr>
+                        <td style="text-align:center; font-size:12px; font-weight:bold; height:30px;">
+                            총 방문자 수
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                            <asp:Panel ID="pnlCounter" runat="server" Width="150px"></asp:Panel>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
    </table>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cphContent" Runat="Server">
+<asp:Content ID="cntContent" ContentPlaceHolderID="cphContent" Runat="Server">
+    <asp:ContentPlaceHolder ID="cphContent" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="cphBottom" Runat="Server">
+<asp:Content ID="cntBottom" ContentPlaceHolderID="cphBottom" Runat="Server">
+    <asp:ContentPlaceHolder ID="cphBottom" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>
 

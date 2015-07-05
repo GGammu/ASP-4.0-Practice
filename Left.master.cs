@@ -11,4 +11,14 @@ public partial class Left : System.Web.UI.MasterPage
     {
 
     }
+
+    protected void btnSubscribe_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnUnsubscribe_Click(object sender, EventArgs e)
+    {
+
+    }
 }
