@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 public partial class Schedule : System.Web.UI.Page
 {
     DateTime selectedDate;
-
+    
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -55,7 +55,7 @@ public partial class Schedule : System.Web.UI.Page
 
         while (dr.Read())
         {
-            ShowTodoList(dr["serial_no"].ToString(), dr["time"].ToString(),
+            ShowTodo(dr["serial_no"].ToString(), dr["time"].ToString(),
                 dr["todo"].ToString(), dr["has_done"].ToString());
         }
 
@@ -63,7 +63,7 @@ public partial class Schedule : System.Web.UI.Page
         conn.Close();
     }
 
-    private void ShowTodoList(string sn, string time, string todo, string hasDone)
+    private void ShowTodo(string sn, string time, string todo, string hasDone)
     {
         string todoString = "<font size='2px'>";
 
@@ -76,6 +76,9 @@ public partial class Schedule : System.Web.UI.Page
             todoString += "</strike>";
 
         todoString += "</font>";
+
+        Label lblTodo = new Label();
+        lblTodo.Text = todoString;
 
         Label lblSpace = new Label();
         lblSpace.Text = "&nbsp;";
@@ -90,7 +93,45 @@ public partial class Schedule : System.Web.UI.Page
         btnDone.CommandName = "Done";
         btnDone.CommandArgument = sn;
         btnDone.Command += new CommandEventHandler(btnSubmit_Command);
+        lblTodo.Controls.Add(btnDone);
 
+        ImageButton btnDelete = new ImageButton();
+        btnDelete.ImageUrl = "~/images/delete.gif";
+        btnDelete.Width = 15;
+        btnDelete.Height = 15;
+        btnDelete.CommandName = "Delete";
+        btnDelete.CommandArgument = sn;
+        btnDelete.Command += new CommandEventHandler(btnSubmit_Command);
+        lblTodo.Controls.Add(btnDelete);
+
+        Table table = new Table();
+        TableRow tr = new TableRow();
+        for (int i = 0; i < 2; i++)
+        {
+            TableCell td = new TableCell();
+            td.VerticalAlign = VerticalAlign.Top;
+            if (i == 0)
+            {
+                td.Width = 40;
+            }
+
+            tr.Cells.Add(td);
+        }
+
+        table.Rows.Add(tr);
+        table.Rows[0].Cells[0].Controls.Add(btnDone);
+        table.Rows[0].Cells[0].Controls.Add(lblSpace);
+        table.Rows[0].Cells[0].Controls.Add(btnDelete);
+        table.Rows[0].Cells[1].Controls.Add(lblTodo);
+
+        phSchedule.Controls.Add(table);
+        phSchedule.Controls.Add(lblHr);
+    }
+
+    protected void ShowNewTodoInsertForm()
+    {
+        Table table = new Table();
+        table.ID = "TABLE";
     }
 
     private void btnSubmit_Command(object sender, CommandEventArgs e)
