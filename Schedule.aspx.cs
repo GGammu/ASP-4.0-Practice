@@ -132,10 +132,78 @@ public partial class Schedule : System.Web.UI.Page
     {
         Table table = new Table();
         table.ID = "TABLE";
+
+        for (int i = 0; i < 3; i++)
+        {
+            TableRow tr = new TableRow();
+            for (int j = 0; j < 2; j++)
+            {
+                TableCell td = new TableCell();
+                if (j % 2 == 0)
+                {
+                    td.HorizontalAlign = HorizontalAlign.Right;
+                }
+                else
+                {
+                    td.HorizontalAlign = HorizontalAlign.Left;
+                }
+
+                tr.Cells.Add(td);
+            }
+            table.Rows.Add(tr);
+        }
+
+        Label lblTodo = new Label();
+        lblTodo.Text = "<font size='2px'>새할일 : </font>";
+        table.Rows[0].Cells[0].Controls.Add(lblTodo);
+
+        TextBox txtTodo = new TextBox();
+        txtTodo.Width = 180;
+        table.Rows[0].Cells[1].Controls.Add(txtTodo);
+
+        Label lblTime = new Label();
+        lblTime.Text = "<font size='2px'>시작 시각 : </font>";
+        table.Rows[1].Cells[0].Controls.Add(lblTime);
+
+        DropDownList ddlHour = new DropDownList();
+        for (int i = 0; i < 24; i++)
+        {
+            ddlHour.Items.Add(string.Format("{0:D2} 시", i));
+        }
+
+        ddlHour.Items.Add("하루 중");
+        table.Rows[1].Cells[1].Controls.Add(ddlHour);
+
+        DropDownList ddlMinute = new DropDownList();
+        for (int i = 0; i < 6; i++)
+        {
+            ddlMinute.Items.Add(string.Format("{0:2D} 분", i * 10));
+        }
+        table.Rows[1].Cells[1].Controls.Add(ddlMinute);
+
+        Button btnSubmit = new Button();
+        btnSubmit.Text = "등록";
+        btnSubmit.CommandName = "Submit";
+        table.Rows[2].Cells[1].Controls.Add(btnSubmit);
+        table.Rows[2].Cells[1].HorizontalAlign = HorizontalAlign.Right;
+
+        phSchedule.Controls.Add(table);
     }
 
     private void btnSubmit_Command(object sender, CommandEventArgs e)
     {
-        throw new NotImplementedException();
+        if (e.CommandName == "Submit")
+        {
+            //if (txtTodo.Text.Trim() == "") return;
+
+            string insertString = "INSERT INTO schedule (u_name, date, time, todo, has_done) ";
+            insertString = "VALUES (@user, @date, @time, @todo, 'N')";
+
+            Table table = (Table)this.phSchedule.FindControl("TABLE");
+            DropDownList ddlGetTime = (DropDownList)table.Rows[1].Cells[1].Controls[0];
+            string timeString = ddlGetTime.SelectedValue.ToString();
+            ddlGetTime.SelectedIndex = 0;
+
+        }
     }
 }
